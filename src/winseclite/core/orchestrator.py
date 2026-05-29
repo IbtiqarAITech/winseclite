@@ -1,6 +1,6 @@
 from __future__ import annotations
 import logging
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from winseclite.config import AppConfig
 from winseclite.core.models import Detection, ScanSession
@@ -54,7 +54,7 @@ class ScanOrchestrator:
                 self.db.save_detection(d)
             session.detections_count = len(detections)
             session.status = "completed"
-            session.finished_at = datetime.now(UTC)
+            session.finished_at = datetime.now(timezone.utc)
             self.db.save_scan_session(session)
             report_path: Path | None = None
             if report_format == "html":
@@ -67,6 +67,6 @@ class ScanOrchestrator:
             return session, detections, report_path
         except Exception:
             session.status = "failed"
-            session.finished_at = datetime.now(UTC)
+            session.finished_at = datetime.now(timezone.utc)
             self.db.save_scan_session(session)
             raise

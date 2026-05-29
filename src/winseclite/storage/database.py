@@ -1,7 +1,7 @@
 from __future__ import annotations
 import json
 import sqlite3
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from winseclite.core.models import Detection, ScanSession
 
@@ -54,7 +54,7 @@ class Database:
             )
 
     def upsert_file_hash(self, sha256: str, file_path: str, size_bytes: int) -> None:
-        now = datetime.now(UTC).isoformat()
+        now = datetime.now(timezone.utc).isoformat()
         with self.connect() as con:
             con.execute(
                 """

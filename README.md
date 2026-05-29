@@ -32,7 +32,7 @@ evasion, packet sniffing, or destructive automatic remediation.
 ## Requirements
 
 - Windows 10 or Windows 11
-- Python 3.12+
+- Python 3.10+
 - PowerShell 5.1+ or PowerShell 7+
 - Administrator rights for complete HKLM/services/system scheduled task visibility
 
@@ -40,7 +40,7 @@ evasion, packet sniffing, or destructive automatic remediation.
 
 ```powershell
 cd winseclite
-py -3.12 -m venv .venv
+py -3.10 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt

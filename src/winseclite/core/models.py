@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -45,7 +45,7 @@ class Detection:
     rule_name: str | None = None
     id: str = field(default_factory=lambda: str(uuid4()))
     scan_id: str | None = None
-    detected_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    detected_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     status: DetectionStatus = DetectionStatus.DETECTED
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -54,7 +54,7 @@ class Detection:
 class ScanSession:
     scan_type: str
     id: str = field(default_factory=lambda: str(uuid4()))
-    started_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     finished_at: datetime | None = None
     status: str = "running"
     files_scanned: int = 0
