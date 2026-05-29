@@ -2,7 +2,7 @@ from __future__ import annotations
 import json
 import os
 import shutil
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
 from winseclite.core.models import Detection, DetectionStatus
@@ -33,7 +33,7 @@ class QuarantineManager:
             pass
         metadata = {"id": item_id, "original_path": str(source), "quarantine_path": str(quarantine_path),
                     "sha256": original_hash, "detection_id": detection.id,
-                    "quarantined_at": datetime.now(UTC).isoformat(),
+                    "quarantined_at": datetime.now(timezone.utc).isoformat(),
                     "detection": {"rule_name": detection.rule_name, "risk_score": detection.risk_score,
                                   "severity": detection.severity.value, "evidence": detection.evidence}}
         metadata_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
@@ -62,6 +62,6 @@ class QuarantineManager:
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.move(str(payload_path), str(target))
         metadata["restore_status"] = "restored"
-        metadata["restored_at"] = datetime.now(UTC).isoformat()
+        metadata["restored_at"] = datetime.now(timezone.utc).isoformat()
         metadata_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
         return target

@@ -1,6 +1,6 @@
 from __future__ import annotations
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from jinja2 import Template
 from winseclite.core.models import Detection, ScanSession
@@ -18,7 +18,7 @@ class ReportBuilder:
 
     def write_json(self, session: ScanSession, detections: list[Detection]) -> Path:
         path = self.report_dir / f"scan-{session.id}.json"
-        data = {"generated_at": datetime.now(UTC).isoformat(), "scan": session.__dict__,
+        data = {"generated_at": datetime.now(timezone.utc).isoformat(), "scan": session.__dict__,
                 "detections": [{"id": d.id, "object_type": d.object_type.value, "object_path": d.object_path,
                                 "sha256": d.sha256, "rule_name": d.rule_name, "severity": d.severity.value,
                                 "risk_score": d.risk_score, "evidence": d.evidence,
