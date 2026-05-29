@@ -1,0 +1,14 @@
+psutil>=5.9.8
+pydantic>=2.7.0
+typer>=0.12.3
+rich>=13.7.1
+jinja2>=3.1.4
+cryptography>=42.0.7
+pywin32>=306; platform_system == "Windows"
+wmi>=1.5.1; platform_system == "Windows"
+yara-python>=4.5.1
+PySide6>=6.7.0
+pytest>=8.2.0
+ruff>=0.4.0
+mypy>=1.10.0
+pyinstaller>=6.7.0

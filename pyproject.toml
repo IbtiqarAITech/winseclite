@@ -1,0 +1,34 @@
+[project]
+name = "winseclite"
+version = "0.1.0"
+description = "Defensive Windows security scanner and endpoint hygiene utility"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{name = "Beyond AI Tech"}]
+license = {text = "MIT"}
+
+[project.scripts]
+winseclite = "winseclite.cli:app"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
